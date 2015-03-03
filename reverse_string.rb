@@ -1,9 +1,7 @@
-# These are two ways to do a string reverse in ruby
-# One does the via bitwise XOR; allowing for incredibly effecient memory usage (no additional variable needed)
-
 require 'yaml'
+
 def reverse_bitwise(s)
-	for i in 0..s.length/2
+	for i in 0...s.length/2
 		s[i] = (s[i].ord ^ s[s.length-1-i].ord).chr
 		s[s.length-1-i] = (s[i].ord ^ s[s.length-1-i].ord).chr
 		s[i] = (s[i].ord ^ s[s.length-1-i].ord).chr
@@ -12,15 +10,15 @@ def reverse_bitwise(s)
 end
 
 
-def reverse(a)
-	(0...(a.length/2)).each {|i| a[i], a[a.length-i-1]=a[a.length-i-1], a[i]}
-	return a
+def reverse(s)
+	(0...(s.length/2)).each {|i| s[i], s[s.length-i-1]=s[s.length-i-1], s[i]}
+	return s
 end
 
 
-s = "Reverse this String please!!1!1!31!"
 
-puts s.size
-puts YAML::dump(reverse_bitwise(s))
-puts s
-# puts reverse(s)
+puts "Enter String:"
+s = gets.chomp
+
+puts "Normal:\n\t#{reverse(s.clone)}"
+puts "Bitwise:\n\t#{reverse_bitwise(s.clone)}"
